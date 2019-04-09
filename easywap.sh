@@ -2,7 +2,7 @@ echo "deb https://http.kali.org/kali kali-rolling main non-free contrib" > /etc/
 wget -q -O - https://archive.kali.org/archive-key.asc  | apt-key add
 apt-get update
 apt-get install isc-dhcp-server
-airmon-ng check kill
+#airmon-ng check kill
 airmon-ng start wlan1
 #airodump-ng wlan1mon
 
